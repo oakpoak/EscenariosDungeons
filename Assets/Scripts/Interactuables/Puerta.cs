@@ -20,9 +20,5 @@ public class Puerta : ItemInteractive
             isOpened = true;
             animator.SetBool("Abrir", true);  // Activamos el parámetro "Abrir" en el Animator
         }
-        else
-        {
-            Debug.Log("La puerta ya está abierta.");
-        }
     }
 }
