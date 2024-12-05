@@ -4,8 +4,16 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float velocidad = 5f;
+    public float velocidad = 5f; // Velocidad normal
+    public float velocidadCorrer = 10f; // Velocidad al correr
+    public float rotacionVelocidad = 700f; // Velocidad de rotación del jugador
+    public float saltoFuerza = 7f; // Fuerza de salto
+
+    public Transform sueloDetectado; // Referencia al objeto vacío para detectar el suelo
+    public float distanciaSuelo = 0.5f; // Distancia a la que se considera que el jugador está tocando el suelo
+
     private Rigidbody rb;
+    private bool estaSaltando = false;
 
     void Start()
     {
@@ -15,14 +23,55 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        // Detectar si el jugador está corriendo
+        float velocidadActual = Input.GetKey(KeyCode.LeftShift) ? velocidadCorrer : velocidad;
+
         // Movimiento en el espacio del mundo (con fuerzas)
-        float movimientoX = Input.GetAxis("Horizontal") * velocidad;
-        float movimientoZ = Input.GetAxis("Vertical") * velocidad;
+        float movimientoX = Input.GetAxis("Horizontal") * velocidadActual;
+        float movimientoZ = Input.GetAxis("Vertical") * velocidadActual;
 
         // Vector de movimiento
         Vector3 movimiento = new Vector3(movimientoX, 0, movimientoZ);
 
-        // Usamos el Rigidbody para mover el objeto
+        // Mover al jugador
         rb.MovePosition(transform.position + movimiento * Time.deltaTime);
+
+        // Si estamos moviéndonos (en cualquier dirección)
+        if (movimiento.magnitude > 0.1f)
+        {
+            // Calcular la dirección hacia la que nos estamos moviendo (sin altura, solo en el plano horizontal)
+            Quaternion rotacionObjetivo = Quaternion.LookRotation(movimiento.normalized);
+
+            // Rotar suavemente hacia la dirección de movimiento
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, rotacionObjetivo, rotacionVelocidad * Time.deltaTime);
+        }
+
+        // Detectar si el jugador está tocando el suelo y si la tecla de salto es presionada
+        if (Input.GetKeyDown(KeyCode.Space) && EstaEnElSuelo() && !estaSaltando)
+        {
+            Salto();
+        }
+    }
+
+    // Método para detectar si el jugador está tocando el suelo usando el objeto vacío
+    bool EstaEnElSuelo()
+    {
+        // Verificar si la posición Y del objeto vacío está cerca de la altura esperada (es decir, que el jugador esté tocando el suelo)
+        return sueloDetectado.position.y <= transform.position.y + distanciaSuelo;
+    }
+
+    // Método para hacer saltar al jugador
+    void Salto()
+    {
+        estaSaltando = true;
+        rb.AddForce(Vector3.up * saltoFuerza, ForceMode.Impulse);
+        StartCoroutine(EsperaSalto());
+    }
+
+    // Coroutine para esperar el regreso al suelo
+    IEnumerator EsperaSalto()
+    {
+        yield return new WaitForSeconds(0.1f); // Esperar un pequeño intervalo para evitar múltiples saltos
+        estaSaltando = false;
     }
 }

@@ -37,7 +37,7 @@ public class PlayerThreeDV2 : MonoBehaviour
         // Ajustar el índice si es negativo
         if (currentAlbedoIndex < 0)
         {
-            currentAlbedoIndex = albedoTextures.Length - 1;
+            currentAlbedoIndex = 2;
         }
 
         // Cambiar el albedo del material del objeto "Catito"
