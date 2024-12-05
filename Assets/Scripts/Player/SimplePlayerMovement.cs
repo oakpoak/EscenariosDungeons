@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody rb;
     private bool estaSaltando = false;
-
+    public Animator anim;
     void Start()
     {
         // Obtener el Rigidbody adjunto al objeto
@@ -23,14 +23,40 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        // Verifica si alguna de las teclas de movimiento (W, A, S, D) está presionada
+        bool isWalking = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D);
+
+        // Verifica si se está presionando Shift junto con las teclas de movimiento
+        bool isRunning = isWalking && Input.GetKey(KeyCode.LeftShift);
+
+        // Si Shift está presionado, activa el parámetro "Run" y desactiva "Walk"
+        if (isRunning)
+        {
+            anim.Play("Running");
+            anim.SetBool("Walk", false);
+            anim.SetBool("Run", true); // Asegura que el estado de "Idle" no esté activado
+        }
+        else if (isWalking)
+        {
+            anim.Play("walking");
+            // Si no se está corriendo, activa "Walk" y desactiva "Run"
+            anim.SetBool("Walk", true);
+            anim.SetBool("Run", false); // Asegura que el estado de "Idle" no esté activado
+        }
+        else
+        {
+            anim.Play("Unity Hum Idle");
+            // Si no se está presionando ninguna tecla de movimiento, activa "Idle"
+            anim.SetBool("Walk", false);
+            anim.SetBool("Run", false);
+        }
+//---------------------------------------------------------------------------------------------------------
         // Detectar si el jugador está corriendo
         float velocidadActual = Input.GetKey(KeyCode.LeftShift) ? velocidadCorrer : velocidad;
 
         // Movimiento en el espacio del mundo (con fuerzas)
         float movimientoX = Input.GetAxis("Horizontal") * velocidadActual;
         float movimientoZ = Input.GetAxis("Vertical") * velocidadActual;
-
-        // Vector de movimiento
         Vector3 movimiento = new Vector3(movimientoX, 0, movimientoZ);
 
         // Mover al jugador
