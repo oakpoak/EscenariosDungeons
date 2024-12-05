@@ -2760,6 +2760,7 @@ MonoBehaviour:
   cam: {fileID: 1936659682}
   sueloDetectado: {fileID: 469245696}
   distanciaSuelo: 0.5
+  anim: {fileID: 1225375311}
 --- !u!1 &1240641683
 GameObject:
   m_ObjectHideFlags: 0
