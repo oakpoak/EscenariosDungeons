@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Opencofre : MonoBehaviour
+public class Opencofre : ItemInteractive
 {
     public Animator animator;  // El Animator de la cofreabriendo
     private bool isOpened = false;  // Si la cofre  ya fue abierta
@@ -14,7 +14,7 @@ public class Opencofre : MonoBehaviour
     }
 
     // Sobrescribimos el método Interact para definir qué sucede cuando el jugador interactúa con la puerta
-    public  void Interact()
+    public override void Interact()
     {
         if (!isOpened)
         {
