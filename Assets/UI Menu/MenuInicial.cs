@@ -9,4 +9,10 @@ public class MenuInicial : MonoBehaviour
     {
         SceneManager.LoadScene("Entrada");
     }
+
+    public void MenuInicio()
+    {
+        SceneManager.LoadScene("MenuInicio");
+    }
+
 }
