@@ -6,7 +6,7 @@ Avatar:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: FINALCATAvatar
+  m_Name: FINALCAT_PracticumAvatar
   m_AvatarSize: 11140
   m_Avatar:
     serializedVersion: 3
@@ -1107,18 +1107,18 @@ Avatar:
         m_Length: 0
         m_Modified: 0
     m_Skeleton:
-    - m_Name: FINALCAT(Clone)
+    - m_Name: FINALCAT_Practicum(Clone)
       m_ParentName: 
       m_Position: {x: 0, y: 0, z: 0}
       m_Rotation: {x: 0, y: 0, z: 0, w: 1}
       m_Scale: {x: 1, y: 1, z: 1}
     - m_Name: CATITO
-      m_ParentName: FINALCAT(Clone)
+      m_ParentName: FINALCAT_Practicum(Clone)
       m_Position: {x: -0, y: 0, z: 0}
       m_Rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
       m_Scale: {x: 99.999916, y: 100, z: 100}
     - m_Name: metarig.001
-      m_ParentName: FINALCAT(Clone)
+      m_ParentName: FINALCAT_Practicum(Clone)
       m_Position: {x: -0, y: 0, z: 0}
       m_Rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
       m_Scale: {x: 100, y: 100, z: 100}

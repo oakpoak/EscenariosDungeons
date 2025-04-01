@@ -3,12 +3,7 @@ guid: 28613da5892c13646aafead9f71250ba
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: CatColorKRITA
-    second: {fileID: 2100000, guid: 0aa3ad029b333eb4b8499aebc07458e2, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
