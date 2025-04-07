@@ -28,7 +28,7 @@ jobs:
           targetPlatform: StandaloneWindows64
 
       - name: Upload Build Artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: Build
           path: build
