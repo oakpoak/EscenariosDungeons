@@ -151,9 +151,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 988224594}
   - {fileID: 2002938372}
   - {fileID: 207130693}
+  - {fileID: 988224594}
+  - {fileID: 1618447704}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &207130692
@@ -181,7 +182,7 @@ Transform:
   m_GameObject: {fileID: 207130692}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -1.7, z: 0.39}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -475,8 +476,8 @@ MonoBehaviour:
   rotacionVelocidad: 700
   saltoFuerza: 7
   cam: {fileID: 2002938372}
-  sueloDetectado: {fileID: 207130693}
-  distanciaSuelo: 0.5
+  sueloDetectado: {fileID: 2101054022}
+  distanciaSuelo: 0
   anim: {fileID: 988224597}
 --- !u!114 &988224596
 MonoBehaviour:
@@ -504,7 +505,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 988224593}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: e5136ecca1df8f24dba1e93f5ff12669, type: 2}
+  m_Avatar: {fileID: 9000000, guid: 28613da5892c13646aafead9f71250ba, type: 3}
   m_Controller: {fileID: 9100000, guid: 3b18298efb833df4abf47fea4fbac37b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
@@ -644,7 +645,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 28613da5892c13646aafead9f71250ba,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 2.86
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 28613da5892c13646aafead9f71250ba,
         type: 3}
@@ -778,13 +779,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1618447702}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.93, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 614974273}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 68258038}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2002938369
 GameObject:
@@ -894,7 +895,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 988224594}
   rotationSpeed: -1.74
-  distance: 0.39
+  distance: 11
   height: 1.78
 --- !u!114 &2002938374
 MonoBehaviour:
@@ -1051,6 +1052,5 @@ SceneRoots:
   m_Roots:
   - {fileID: 870830814}
   - {fileID: 674668305}
-  - {fileID: 1618447704}
   - {fileID: 68258038}
   - {fileID: 2101054022}
