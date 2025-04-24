@@ -151,8 +151,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2002938372}
   - {fileID: 207130693}
+  - {fileID: 2002938372}
   - {fileID: 988224594}
   - {fileID: 1618447704}
   m_Father: {fileID: 0}
@@ -471,8 +471,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5648c3b3ea3747c4584b8c895acc692e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocidad: 5
-  velocidadCorrer: 10
+  velocidad: 20
+  velocidadCorrer: 40
   rotacionVelocidad: 700
   saltoFuerza: 7
   cam: {fileID: 2002938372}
@@ -874,13 +874,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2002938369}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.7, z: -34.6}
+  m_LocalRotation: {x: 0.34574562, y: -0, z: -0, w: 0.93832827}
+  m_LocalPosition: {x: 0, y: 21.7, z: -19}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 68258038}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 40.455, y: 0, z: 0}
 --- !u!114 &2002938373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -894,9 +894,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 988224594}
-  rotationSpeed: -1.74
-  distance: 11
-  height: 1.78
+  distance: 16.87
+  height: 12.67
+  positionSmooth: 10
+  rotationSmooth: 5
 --- !u!114 &2002938374
 MonoBehaviour:
   m_ObjectHideFlags: 0
