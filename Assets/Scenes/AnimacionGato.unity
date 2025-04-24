@@ -199,7 +199,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: c4fc612fdd55a184193a3ced68b4bbc0,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.66
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c4fc612fdd55a184193a3ced68b4bbc0,
         type: 3}
@@ -209,7 +209,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: c4fc612fdd55a184193a3ced68b4bbc0,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 22.45
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c4fc612fdd55a184193a3ced68b4bbc0,
         type: 3}
@@ -281,7 +281,7 @@ Animator:
   m_GameObject: {fileID: 614974271}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: c4fc612fdd55a184193a3ced68b4bbc0, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 68b0fcfaa72dbcf41b49b353e9e7e11c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -537,7 +537,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1.791007, y: 4.092294, z: 1.804874}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 2, z: 0}
 --- !u!54 &988224599
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -743,6 +743,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1618447704}
   - component: {fileID: 1618447703}
+  - component: {fileID: 1618447705}
+  - component: {fileID: 1618447706}
   m_Layer: 0
   m_Name: Coyote_Enemigo
   m_TagString: Untagged
@@ -780,13 +782,61 @@ Transform:
   m_GameObject: {fileID: 1618447702}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.93, z: 0}
+  m_LocalPosition: {x: 0, y: -1.93, z: 14.54}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 614974273}
   m_Father: {fileID: 68258038}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1618447705
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1618447702}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.37, y: 3.8289719, z: 1.67}
+  m_Center: {x: 0, y: 1.8244505, z: 0.12}
+--- !u!54 &1618447706
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1618447702}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &2002938369
 GameObject:
   m_ObjectHideFlags: 0
@@ -894,10 +944,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 988224594}
-  distance: 16.87
-  height: 12.67
-  positionSmooth: 10
-  rotationSmooth: 5
 --- !u!114 &2002938374
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -46,7 +46,7 @@ public class PlayerThreeDV2 : MonoBehaviour
             Renderer renderer = catito.GetComponent<Renderer>();
             if (renderer != null && albedoTextures.Length > 0)
             {
-                renderer.material.SetTexture("_MainTex", albedoTextures[currentAlbedoIndex]);
+                renderer.material.SetTexture("_BaseMap", albedoTextures[currentAlbedoIndex]);
             }
             else
             {
