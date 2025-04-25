@@ -115,7 +115,7 @@ public class PlayerMovement : MonoBehaviour
     // Coroutine para esperar el regreso al suelo
     IEnumerator EsperaSalto()
     {
-        yield return new WaitForSeconds(0.1f); // Esperar un pequeño intervalo para evitar múltiples saltos
+        yield return new WaitForSeconds(1.5f); // Esperar un pequeño intervalo para evitar múltiples saltos
         estaSaltando = false;
     }
 }
