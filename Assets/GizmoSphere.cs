@@ -1,16 +1,18 @@
+// GizmoSphere.cs
 using UnityEngine;
 
 // Esto hace que OnDrawGizmos se ejecute siempre, incluso fuera de Play
 [ExecuteAlways]
-public class SphereGizmo : MonoBehaviour
+public class GizmoSphere : MonoBehaviour
 {
     [Header("Offset en cada eje")]
     public float offsetX = 0f;
     public float offsetY = 0f;
     public float offsetZ = 0f;
 
-    [Header("Escala (X=ancho, Y=alto, Z=profundidad)")]
-    public Vector3 scale = new Vector3(1f, 2f, 1f);
+    [Header("Radio de detección")]
+    [Min(0.01f)]
+    public float radius = 1f;
 
     [Header("Color (alpha controla opacidad)")]
     [ColorUsage(true, true)]
@@ -18,11 +20,12 @@ public class SphereGizmo : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        // Construye el offset desde los tres floats
+        // Calcula posición mundial del centro
         Vector3 offset = new Vector3(offsetX, offsetY, offsetZ);
         Vector3 worldPos = transform.TransformPoint(offset);
 
-        Matrix4x4 mat = Matrix4x4.TRS(worldPos, transform.rotation, scale);
+        // Monta la matriz de escala uniforme basada en el radio
+        Matrix4x4 mat = Matrix4x4.TRS(worldPos, transform.rotation, Vector3.one * radius);
         var oldMat = Gizmos.matrix;
         Gizmos.matrix = mat;
 
