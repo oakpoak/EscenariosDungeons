@@ -1143,6 +1143,10 @@ MonoBehaviour:
   arriveThreshold: 0.5
   detectionGizmo: {fileID: 1618447709}
   playerObject: {fileID: 988224593}
+  HoldTime: 3
+  State: {fileID: 1618447710}
+  animator: {fileID: 1618447703}
+  isHolding: 0
 --- !u!114 &1618447709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1158,8 +1162,8 @@ MonoBehaviour:
   offsetX: 0
   offsetY: 2.05
   offsetZ: 0.08
-  radius: 7.84
-  gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 0.23137255}
+  radius: 14.19
+  gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 0.74509805}
 --- !u!114 &1618447710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1172,7 +1176,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b874034c65715442a30cf8a0df5f66a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 988224593}
   walkParam: Walking
   runParam: Running
 --- !u!4 &1644380020 stripped
