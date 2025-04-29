@@ -8,4 +8,8 @@ public class Freeze : MonoBehaviour
     {
         Time.timeScale = 0f;
     }
+    public void UnFreezeScreen()
+    {
+        Time.timeScale = 1f;
+    }
 }

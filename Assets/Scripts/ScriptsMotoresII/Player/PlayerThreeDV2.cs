@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerThreeDV2 : MonoBehaviour
@@ -8,25 +9,30 @@ public class PlayerThreeDV2 : MonoBehaviour
     public GameObject catito; // Referencia al objeto "Catito" asignable en el Inspector
     public Texture[] albedoTextures; // Array de texturas para el albedo
     private int currentAlbedoIndex = 0; // Índice de la textura de albedo actual
+    public GameObject GameManager;
 
     void Update()
     {
-        // Cambiar albedo al siguiente con "E"
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            ChangeAlbedo(1); // Avanza al siguiente albedo
-        }
-        // Cambiar albedo al anterior con "Q"
-        else if (Input.GetKeyDown(KeyCode.Q))
-        {
-            ChangeAlbedo(-1); // Retrocede al albedo anterior
-        }
+        if ( GameManager.GetComponent<GameManager>().Fight==false)
+        { 
+            // Cambiar albedo al siguiente con "E"
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                ChangeAlbedo(1); // Avanza al siguiente albedo
+            }
+            // Cambiar albedo al anterior con "Q"
+            else if (Input.GetKeyDown(KeyCode.Q))
+            {
+                ChangeAlbedo(-1); // Retrocede al albedo anterior
+            }
 
-        // Interacción con el objeto en rango al presionar "F"
-        if (interactableInRange != null && interactableInRange.CouldInteract && Input.GetKeyDown(KeyCode.F))
-        {
-            interactableInRange.Interact(); // Llama al método interact
+            // Interacción con el objeto en rango al presionar "F"
+            if (interactableInRange != null && interactableInRange.CouldInteract && Input.GetKeyDown(KeyCode.F))
+            {
+                interactableInRange.Interact(); // Llama al método interact
+            }
         }
+        
     }
 
     void ChangeAlbedo(int step)
