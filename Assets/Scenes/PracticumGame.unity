@@ -840,6 +840,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 28039389}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &41719267 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8616288187214227333, guid: 28613da5892c13646aafead9f71250ba,
+    type: 3}
+  m_PrefabInstance: {fileID: 483921960}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &44466160
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8687,12 +8693,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d51addc21c94a344982d9f5214389190,
     type: 3}
   m_PrefabInstance: {fileID: 234369362}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &240511417 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 28613da5892c13646aafead9f71250ba,
-    type: 3}
-  m_PrefabInstance: {fileID: 483921960}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &244406470
 PrefabInstance:
@@ -72266,7 +72266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 121dfa2c17fd8ca4598c1989923a993f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  catito: {fileID: 240511417}
+  catito: {fileID: 41719267}
   albedoTextures:
   - {fileID: 2800000, guid: ae9e92dca14149f4a90a165b33fc2beb, type: 3}
   - {fileID: 2800000, guid: 55e9117ba10051a428dac1c539e7bff1, type: 3}
