@@ -60,7 +60,12 @@ public class BattleUIController : MonoBehaviour
             if (positionIndex == 0)
             {
                 characterUIElements[i].transform.localScale = selectedScale;
-                EnableButtons(i, true);
+
+                var status = characterController.characters[i].GetComponent<CharacterStatus>();
+                bool isKO = status != null && status.isKO;
+
+                // Desactivar botones si está KO
+                EnableButtons(i, !isKO);
             }
             else
             {
@@ -70,6 +75,7 @@ public class BattleUIController : MonoBehaviour
         }
     }
 
+
     private void EnableButtons(int elementIndex, bool enable)
     {
         attackButtons[elementIndex].interactable = enable;
@@ -78,44 +84,20 @@ public class BattleUIController : MonoBehaviour
 
     public void OnAttackButtonPressed(int characterIndex)
     {
-        Debug.Log($"Botón de ataque presionado para el personaje {characterIndex}");
         if (characterIndex == characterController.selectedIndex)
         {
-            float attackDuration = characterController.characters[characterIndex]
-                .GetComponent<Animator>()
-                .GetCurrentAnimatorStateInfo(0).length;
-
-            CameraController.Instance.RequestCameraChange(CameraController.Instance.characterAttackCamera, attackDuration);
-
-            characterController.PerformAttack(characterIndex);
-
-            bossHealthBar.value -= 10;
-
-            if (bossHealthBar.value <= 0)
-            {
-                Debug.Log("¡El jefe ha sido derrotado!");
-            }
+            BattleManager.Instance.PlayerAttack(characterIndex);
         }
     }
 
     public void OnSkillButtonPressed(int characterIndex)
     {
-        Debug.Log($"Botón de habilidad presionado para el personaje {characterIndex}");
         if (characterIndex == characterController.selectedIndex)
         {
-            float skillDuration = 1.5f;
-
-            CameraController.Instance.RequestCameraChange(CameraController.Instance.characterAttackCamera, skillDuration);
-
-            Debug.Log($"Habilidad especial del personaje {characterIndex}");
-            bossHealthBar.value -= 20;
-
-            if (bossHealthBar.value <= 0)
-            {
-                Debug.Log("¡El jefe ha sido derrotado!");
-            }
+            BattleManager.Instance.UseSkill(characterIndex);
         }
     }
+
 
     public void ReduceCharacterHealth(int characterIndex, float damage)
     {
@@ -126,4 +108,25 @@ public class BattleUIController : MonoBehaviour
             Debug.Log($"El personaje {characterIndex} ha sido derrotado.");
         }
     }
+
+    public Slider GetHealthBarForCharacter(GameObject character)
+    {
+        for (int i = 0; i < characters.Length; i++)
+        {
+            if (characters[i] == character)
+                return characterHealthBars[i];
+        }
+
+        return null;
+    }
+
+    public void SetButtonsInteractable(bool interactable)
+    {
+        int index = characterController.selectedIndex;
+        attackButtons[index].interactable = interactable;
+        skillButtons[index].interactable = interactable;
+    }
+
+
+
 }
