@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (Control.Fight == false)
+        if (Control.Fight == false && Control.puzzle == false)
         {
             // Verifica si alguna de las teclas de movimiento (W, A, S, D) está presionada
             bool isWalking = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D);

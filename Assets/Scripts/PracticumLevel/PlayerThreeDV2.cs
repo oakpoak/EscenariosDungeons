@@ -13,7 +13,7 @@ public class PlayerThreeDV2 : MonoBehaviour
 
     void Update()
     {
-        if ( GameManager.GetComponent<GameManager>().Fight==false)
+        if ( GameManager.GetComponent<GameManager>().Fight==false && GameManager.GetComponent<GameManager>().puzzle==false)
         { 
             // Cambiar albedo al siguiente con "E"
             if (Input.GetKeyDown(KeyCode.E))
@@ -27,6 +27,7 @@ public class PlayerThreeDV2 : MonoBehaviour
             }
 
             // Interacción con el objeto en rango al presionar "F"
+
             if (interactableInRange != null && interactableInRange.CouldInteract && Input.GetKeyDown(KeyCode.F))
             {
                 interactableInRange.Interact(); // Llama al método interact
