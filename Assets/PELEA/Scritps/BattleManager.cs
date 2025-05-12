@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class BattleManager : MonoBehaviour
@@ -19,7 +20,6 @@ public class BattleManager : MonoBehaviour
     [Header("Multiplicadores de efecto")]
     public float multiplicadorDebilitamiento = 1.25f;
     public float danioPorVeneno = 5f;
-
 
     private void Awake()
     {
@@ -45,7 +45,6 @@ public class BattleManager : MonoBehaviour
         return result;
     }
 
-
     public void PlayerAttack(int characterIndex)
     {
         if (currentState != BattleState.PlayerTurn || characterIndex != characterController.selectedIndex)
@@ -68,7 +67,6 @@ public class BattleManager : MonoBehaviour
         characterController.PerformSkillWithRoll(characterIndex, roll, OnPlayerAttackFinished);
     }
 
-
     private void OnPlayerAttackFinished()
     {
         StartCoroutine(EnemyTurn());
@@ -90,7 +88,6 @@ public class BattleManager : MonoBehaviour
         enemyController.PerformAttackBasedOnRoll(roll, OnEnemyAttackFinished);
     }
 
-
     private void OnEnemyAttackFinished()
     {
         // Buscar un personaje que no esté KO
@@ -107,6 +104,14 @@ public class BattleManager : MonoBehaviour
             }
         }
 
+        // ⚠️ Verificamos si todos están KO
+        if (AreAllCharactersKO())
+        {
+            Debug.Log("Todos los personajes están KO. Derrota.");
+            StartCoroutine(HandleDefeat());
+            return;
+        }
+
         currentState = BattleState.PlayerTurn;
 
         InventoryUI inventory = FindObjectOfType<InventoryUI>();
@@ -114,5 +119,35 @@ public class BattleManager : MonoBehaviour
             inventory.ResetTurnItemUsage();
     }
 
+    private bool AreAllCharactersKO()
+    {
+        var cc = FindObjectOfType<CharacterController>();
 
+        foreach (var character in cc.characters)
+        {
+            var status = character.GetComponent<CharacterStatus>();
+            if (status != null && status.IsAlive())
+                return false;
+        }
+
+        return true;
+    }
+
+    private IEnumerator HandleDefeat()
+    {
+        yield return new WaitForSeconds(3f); // pequeña pausa
+
+        // Reiniciar salud
+        for (int i = 0; i < CharacterData.currentHealth.Length; i++)
+        {
+            CharacterData.currentHealth[i] = -1f;
+        }
+
+        // Reiniciar objetos
+        InventoryData.itemCount = 0;
+
+        Debug.Log("Derrota: Volviendo al menú principal...");
+        SceneManager.LoadScene("MenuInicio"); // Asegúrate que la escena "MenuInicio" esté en Build Settings
+    }
 }
+
