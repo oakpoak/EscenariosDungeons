@@ -1,28 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 public class Puerta : ItemInteractive
 {
-    public Animator animator;  // El Animator de la puerta
-    private bool isOpened = false;  // Si la puerta ya fue abierta
-
-    void Start()
-    {
-        // Obtén el componente Animator de la puerta
-        animator = GetComponent<Animator>();
-    }
-
+    public BoxCollider Tiger;
+    public GameObject Door1;
+    public GameObject Door2;
+    public GameManager GameManager;
+    
     // Sobrescribimos el método Interact para definir qué sucede cuando el jugador interactúa con la puerta
     public override void Interact()
     {
-        if (!isOpened)
-        {
-            isOpened = true;
-            animator.SetBool("Abrir", true);  // Activamos el parámetro "Abrir" en el Animator
-        }
-        else
-        {
-            Debug.Log("La puerta ya está abierta.");
-        }
+        _Mechanism(false);
+            
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        _Mechanism(true);
+    }
+
+    private void _Mechanism(bool check)
+    {
+        Door1.SetActive(check);
+        Door2.SetActive(check);
+
     }
 }
