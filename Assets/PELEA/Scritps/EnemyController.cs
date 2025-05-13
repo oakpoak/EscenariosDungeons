@@ -6,6 +6,11 @@ public class EnemyController : MonoBehaviour
     public static EnemyController Instance;
 
     private Animator animator;
+
+    [Header("Configuración de enemigo")]
+    public float maxHealth = 100f;
+    private float currentHealth;
+
     public float attackDamage = 15f;
     public float fixedAttackDuration = 1.5f; // Ajustar según la duración real de la animación
 
@@ -20,6 +25,13 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+
+        // Inicializar salud
+        currentHealth = maxHealth;
+
+        // Configurar barra de vida visual
+        BattleUIController.Instance.bossHealthBar.maxValue = maxHealth;
+        BattleUIController.Instance.bossHealthBar.value = currentHealth;
     }
 
     public void PerformAttack(System.Action onAttackFinished)
@@ -50,7 +62,6 @@ public class EnemyController : MonoBehaviour
         }
         else if (roll >= 2 && roll <= 8)
         {
-            // Filtrar personajes vivos
             var vivos = new System.Collections.Generic.List<GameObject>();
             for (int i = 0; i < ui.characters.Length; i++)
             {
@@ -78,11 +89,9 @@ public class EnemyController : MonoBehaviour
                     status.TakeDamage(attackDamage * 0.5f);
             }
         }
-
         else if (roll >= 9 && roll <= 14)
         {
             Debug.Log("Daño leve a todos los personajes");
-
             for (int i = 0; i < ui.characters.Length; i++)
             {
                 var character = ui.characters[i];
@@ -97,7 +106,6 @@ public class EnemyController : MonoBehaviour
         else if (roll >= 15 && roll <= 19)
         {
             Debug.Log("Daño normal a todos los personajes");
-
             for (int i = 0; i < ui.characters.Length; i++)
             {
                 var character = ui.characters[i];
@@ -112,7 +120,6 @@ public class EnemyController : MonoBehaviour
         else if (roll == 20)
         {
             Debug.Log("¡Golpe crítico! Daño alto a todos los personajes");
-
             for (int i = 0; i < ui.characters.Length; i++)
             {
                 var character = ui.characters[i];
@@ -133,7 +140,22 @@ public class EnemyController : MonoBehaviour
         if (animator != null)
             animator.SetTrigger("DamageTrigger");
     }
+
+    // (Opcional) método para recibir daño directo si lo necesitas desde otro script
+    public void TakeDamage(float amount)
+    {
+        currentHealth -= amount;
+        currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
+
+        BattleUIController.Instance.bossHealthBar.value = currentHealth;
+
+        if (currentHealth <= 0f)
+        {
+            Debug.Log("El enemigo ha sido derrotado.");
+        }
+    }
 }
+
 
 
 

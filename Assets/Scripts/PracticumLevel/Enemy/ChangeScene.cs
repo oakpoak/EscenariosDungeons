@@ -1,5 +1,5 @@
 ﻿#if UNITY_EDITOR
-using UnityEditor;  // para extraer el nombre de tu SceneAsset en el Editor
+using UnityEditor;
 #endif
 using System.Collections;
 using UnityEngine;
@@ -9,16 +9,17 @@ using UnityEngine.UI;
 public class ChangeScene : MonoBehaviour
 {
     [Header("Escena Addressable")]
-    public SceneAsset Pelea;      // tu SceneAsset de la escena “Pelea”
-    public float Time;            // duración del fade‐out en segundos (tiempo real)
-    public Camera Cam;            // tu cámara, por si quieres usarla luego
+    public SceneAsset Pelea;
+    public float fadeDuration = 1f; // ← antes se llamaba "Time", causaba conflicto
+    public Camera Cam;
 
     [Header("Fade UI")]
-    public Image fadeImage;       // arrastra aquí la Image negra que cubra toda la pantalla
+    public Image fadeImage;
 
     public GameManager GM;
 
     private string sceneName;
+    private bool alreadyTriggered = false;
 
     private void Start()
     {
@@ -31,39 +32,59 @@ public class ChangeScene : MonoBehaviour
 #else
         sceneName = Pelea != null ? Pelea.name : "";
 #endif
-        // Inicializar la imagen completamente transparente
+
         if (fadeImage != null)
             fadeImage.color = new Color(0, 0, 0, 0);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (!alreadyTriggered && other.CompareTag("Player"))
         {
+            alreadyTriggered = true;
+
+            // Guardar ID del enemigo y posición del jugador
+            EnemyMapID id = GetComponent<EnemyMapID>();
+            if (id != null)
+            {
+                WorldState.enemigoActualID = id.enemyID;
+            }
+
+            WorldState.posicionJugador = other.transform.position;
             GM.Fight = true;
+
             StartCoroutine(TransitionRoutine());
         }
     }
 
     private IEnumerator TransitionRoutine()
     {
-        // 1. Congelar el juego
-        UnityEngine.Time.timeScale = 0f;
+        // 1. Pausar el tiempo
+        Time.timeScale = 0f;
 
-        // 2. Fade‐out a negro en “Time” segundos (usa unscaledDeltaTime)
+        // 2. Efecto de fade (en tiempo real)
         float elapsed = 0f;
-        while (elapsed < Time)
+        while (elapsed < fadeDuration)
         {
             elapsed += UnityEngine.Time.unscaledDeltaTime;
-            float a = Mathf.Clamp01(elapsed / Time);
-            fadeImage.color = new Color(0, 0, 0, a);
+            float a = Mathf.Clamp01(elapsed / fadeDuration);
+            if (fadeImage != null)
+                fadeImage.color = new Color(0, 0, 0, a);
             yield return null;
         }
 
-        // 3. Restaurar timeScale y cargar la escena
-        UnityEngine.Time.timeScale = 1f;
+        // 3. Cargar escena y esperar que termine
         if (!string.IsNullOrEmpty(sceneName))
-            SceneManager.LoadSceneAsync(sceneName);
+        {
+            AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
+            while (!asyncLoad.isDone)
+                yield return null;
+
+            // 4. Reactivar el tiempo dentro de la nueva escena
+            Time.timeScale = 1f;
+        }
     }
 }
+
+
 

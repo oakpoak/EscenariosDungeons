@@ -70,6 +70,24 @@ public class BattleManager : MonoBehaviour
     private void OnPlayerAttackFinished()
     {
         StartCoroutine(EnemyTurn());
+
+        // Agrega justo al final del método OnPlayerAttackFinished()
+        if (BattleUIController.Instance.bossHealthBar.value <= 0f)
+        {
+            Debug.Log("¡El enemigo ha sido derrotado!");
+
+            // Guardar el ID del enemigo vencido
+            if (!string.IsNullOrEmpty(WorldState.enemigoActualID))
+            {
+                WorldState.enemigosDerrotados.Add(WorldState.enemigoActualID);
+                WorldState.enemigoActualID = ""; // limpiar
+            }
+
+            // Regresar a la mazmorra
+            SceneManager.LoadScene("PracticumGame"); // tu escena principal
+            return;
+        }
+
     }
 
     private IEnumerator EnemyTurn()
